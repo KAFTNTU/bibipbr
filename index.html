@@ -808,9 +808,10 @@
             const prediction = robotBrain.predict(sensTensor);
             const data = await prediction.data(); // [L, R] ranges -1 to 1
             
-            // Convert back to -100 to 100
-            let l = Math.round(data[0] * 100);
-            let r = Math.round(data[1] * 100);
+            // Convert back to -100 to 100 AND APPLY SPEED MULTIPLIER
+            // Added speedMultiplier so the slider affects AI speed too
+            let l = Math.round(data[0] * 100 * speedMultiplier);
+            let r = Math.round(data[1] * 100 * speedMultiplier);
             
             // Clean up tensor to prevent memory leaks
             sensTensor.dispose();
@@ -818,11 +819,7 @@
             
             // Force Update UI & Motors
             // We bypass the joystick "input" and go straight to motor logic
-            // but we want the UI to update as if we moved the stick? 
-            // Better to just call updateTankLogic with "override" flag logic or just reuse the function
             
-            // Let's use existing logic but hijack variables
-            // Or simpler: Just set motor display and send packet
             currentL = l; 
             currentR = r;
             
