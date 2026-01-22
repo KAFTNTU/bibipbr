@@ -1137,7 +1137,7 @@
         }
 
         function startJoy(e) { if(activeView!=='view-joystick'||isGyroEnabled||isBrainActive)return; dragging=true; stick.classList.remove('snap-back'); const r=base.getBoundingClientRect(); joyCenter={x:r.left+r.width/2,y:r.top+r.height/2}; stick.classList.add('braking'); }
-        function endJoy() { if(activeView!=='view-joystick'||isGyroEnabled||isBrainActive)return; dragging=false; if(navigator.vibrate)navigator.vibrate(5); stick.classList.remove('braking'); resetJoystick(); }
+        function endJoy() { if(activeView!=='view-joystick'||isGyroEnabled||isBrainActive)return; dragging=false; if(navigator.vibrate)navigator.vibrate(500); stick.classList.remove('braking'); resetJoystick(); }
         function resetJoystick() { 
             stick.classList.add('snap-back'); 
             stick.style.transform = `translate(-50%, -50%)`; 
